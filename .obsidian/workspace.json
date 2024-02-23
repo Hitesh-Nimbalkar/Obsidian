@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Notes.md",
+                "file": "DSA/Non Linear DS/TREE.md",
                 "mode": "source",
                 "source": false
               }
@@ -64,12 +64,21 @@
               "type": "bookmarks",
               "state": {}
             }
+          },
+          {
+            "id": "94e47fa10854d8ef",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {}
+            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "5a7d6f7d4dff8f3a",
@@ -85,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Notes.md",
+                "file": "DSA/Non Linear DS/TREE.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Notes.md",
+                "file": "DSA/Non Linear DS/TREE.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,11 +134,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Notes.md"
+                "file": "DSA/Non Linear DS/TREE.md"
               }
             }
+          },
+          {
+            "id": "68ef15b9593ab121",
+            "type": "leaf",
+            "state": {
+              "type": "code-execute-manage-executors",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -143,11 +161,17 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "omnisearch:Omnisearch": false
     }
   },
   "active": "b1bf5f1a2ed439a8",
   "lastOpenFiles": [
-    "Notes.md"
+    "DSA/Non Linear DS/TREE.md",
+    "Spaces/Home",
+    "Spaces",
+    "DSA/Non Linear DS",
+    "DSA"
   ]
 }
