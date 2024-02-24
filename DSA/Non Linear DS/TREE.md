@@ -1,4 +1,5 @@
 
+
 ``` python
 class Node:
     def __init__(self, key):
@@ -26,4 +27,5 @@ root.right.right = Node(7)
 print("Height of the binary tree:", tree_height(root))
 
 ```
+
 

@@ -1,11 +1,19 @@
 [
   "obsidian-git",
   "obsidian-excalidraw-plugin",
-  "make-md",
   "obsidian-icon-folder",
   "execute-code",
   "code-styler",
   "code-emitter",
   "omnisearch",
-  "obsidian-code-block-enhancer"
+  "obsidian-code-block-enhancer",
+  "text-extractor",
+  "drawio-obsidian",
+  "make-md",
+  "oz-image-plugin",
+  "obsidian-image-toolkit",
+  "mini-toolbar",
+  "editing-toolbar",
+  "canvas-mindmap",
+  "obsidian-mind-map"
 ]
