@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data Engineering/Spark.md",
+                "file": "Data Engineering/Hive&nbsp;.md",
                 "mode": "source",
                 "source": false
               }
@@ -112,7 +112,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Data Engineering/Spark.md",
+                "file": "Data Engineering/Hive&nbsp;.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,7 +129,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Data Engineering/Spark.md",
+                "file": "Data Engineering/Hive&nbsp;.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -152,7 +152,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Data Engineering/Spark.md"
+                "file": "Data Engineering/Hive&nbsp;.md"
               }
             }
           },
@@ -189,11 +189,12 @@
   },
   "active": "b3380e1f3a27bad6",
   "lastOpenFiles": [
+    "Data Engineering/Spark.md",
+    "Data Engineering/Hive&nbsp;.md",
     "Spark.png",
     "Data Engineering/Introduction.canvas",
     "Excalidraw/Drawing 2024-02-25 11.31.02.excalidraw.md",
     "Excalidraw/Drawing 2024-02-25 11.30.47.excalidraw.md",
-    "Data Engineering/Spark.md",
     "Data Engineering/Introduction.md",
     "Excalidraw",
     "YARN Working.png",
@@ -209,7 +210,6 @@
     "Spark Ecosystem.png",
     "Spark vs pyspark.png",
     "Spark vs Mapreduce.png",
-    "Pasted image 20240225002728.png",
     "Untitled.md",
     "Data Engineering",
     "Course",
