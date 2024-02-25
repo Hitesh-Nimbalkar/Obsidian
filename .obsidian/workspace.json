@@ -8,24 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "4e250350b54d80f9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Data Engineering/Introduction.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "b3380e1f3a27bad6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data Engineering/Introduction.md",
+                "file": "Data Engineering/Spark.md",
                 "mode": "source",
                 "source": false
               }
@@ -49,8 +37,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -104,7 +91,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -125,7 +113,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Data Engineering/Introduction.md",
+                "file": "Data Engineering/Spark.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -142,7 +130,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Data Engineering/Introduction.md",
+                "file": "Data Engineering/Spark.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -165,7 +153,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Data Engineering/Introduction.md"
+                "file": "Data Engineering/Spark.md"
               }
             }
           },
@@ -194,26 +182,38 @@
       "templates:Insert template": false,
       "obsidian-excalidraw-plugin:Create new drawing": false,
       "omnisearch:Omnisearch": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false,
+      "copilot:Copilot Chat": false,
+      "obsidian-stille:Toggle Stille": false
     }
   },
   "active": "b3380e1f3a27bad6",
   "lastOpenFiles": [
+    "Spark.png",
     "Data Engineering/Introduction.canvas",
+    "Excalidraw/Drawing 2024-02-25 11.31.02.excalidraw.md",
+    "Excalidraw/Drawing 2024-02-25 11.30.47.excalidraw.md",
+    "Data Engineering/Spark.md",
     "Data Engineering/Introduction.md",
+    "Excalidraw",
+    "YARN Working.png",
+    "Sparkoverview.png",
+    "Spark A.png",
+    "Spark Architecture-1.png",
+    "Spark Architecture.png",
+    "pyspark/pyspark.md",
+    "pyspark",
+    "spark/spark.md",
+    "spark",
+    "spark + python.png",
+    "Spark Ecosystem.png",
+    "Spark vs pyspark.png",
+    "Spark vs Mapreduce.png",
+    "Pasted image 20240225002728.png",
     "Untitled.md",
-    "Pasted image 20240224155834.png",
-    "Pasted image 20240224155608.png",
-    "Pasted image 20240224155345.png",
-    "Pasted image 20240224155117.png",
-    "Pasted image 20240224152418.png",
-    "Pasted image 20240224152331.png",
-    "Pasted image 20240224152310.png",
-    "Pasted image 20240224152305.png",
-    "Pasted image 20240224102202.png",
     "Data Engineering",
     "Course",
-    "Pasted image 20240224101425.png",
     "DSA/Linear DS/Queue.md",
     "DSA/Non Linear DS/Tree.md",
     "Spaces/Home",
@@ -223,10 +223,7 @@
     "DSA/Basic/Tuples.md",
     "DSA/Basic/List",
     "DSA/Non Linear DS/Basic/Arrays",
-    "DSA/Basic",
     "Drawing 2024-02-23 23.40.39.excalidraw.md",
-    "Pasted image 20240223234013.md",
-    "DSA/Non Linear DS",
-    "DSA"
+    "Pasted image 20240223234013.md"
   ]
 }

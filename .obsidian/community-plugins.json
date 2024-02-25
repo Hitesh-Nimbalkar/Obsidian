@@ -15,5 +15,20 @@
   "mini-toolbar",
   "editing-toolbar",
   "canvas-mindmap",
-  "obsidian-mind-map"
+  "obsidian-mind-map",
+  "obsidian-pandoc",
+  "better-export-pdf",
+  "multi-column-markdown",
+  "obsidian-outliner",
+  "excalibrain",
+  "obsidian-plugin-toc",
+  "obsidian-markdown-formatting-assistant-plugin",
+  "mousewheel-image-zoom",
+  "arrows-in-md",
+  "editor-width-slider",
+  "obsidian-paste-image-rename",
+  "chatgpt-md",
+  "copilot",
+  "obsidian-stille",
+  "obsidian-banners"
 ]

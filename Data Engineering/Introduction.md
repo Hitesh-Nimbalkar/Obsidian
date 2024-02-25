@@ -21,6 +21,8 @@ The "3 Vs of data" refer to three key characteristics that are often used to des
 
 These three Vs are commonly associated with big data, a term used to describe datasets that are too large or complex for traditional data processing applications. As technology and data science continue to evolve, additional Vs have been proposed, such as Veracity (dealing with the reliability of data) and Value (focusing on extracting meaningful insights).
 
+
+
 ## ETL Pipeline 
 An ETL (Extract, Transform, Load) pipeline is a set of processes and tools used to collect data from various sources, transform it into a desired format, and load it into a target data store, typically a data warehouse or database. The primary goal of an ETL pipeline is to enable efficient and effective data integration, ensuring that data is available in a consistent and usable format for analysis, reporting, and other business intelligence purposes. Let's break down each phase of the ETL process:
 
@@ -200,5 +202,25 @@ The benefits of the Hadoop Distributed File System are as follows:
 
 > [!NOTE]
 > jknaContent
+
+
+--- start-multi-column: ID_5qgn
+```column-settings
+Number of Columns: 2
+Largest Column: standard
+```
+
+Google 
+
+--- column-break ---
+Apple 
+
+
+--- end-multi-column
+
+
+
+
+
 
 

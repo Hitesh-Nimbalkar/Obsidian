@@ -9,9 +9,9 @@
   "mobileMakeBar": true,
   "inlineStyler": true,
   "makerMode": true,
-  "imageThumbnails": false,
+  "imageThumbnails": true,
   "spacesMDBInHidden": true,
-  "inlineStylerColors": false,
+  "inlineStylerColors": true,
   "editorFlow": true,
   "internalLinkClickFlow": true,
   "contextEnabled": true,
@@ -19,7 +19,7 @@
   "saveAllContextToFrontmatter": true,
   "editorFlowStyle": "seamless",
   "autoOpenFileContext": false,
-  "activeView": "Spaces/Home",
+  "activeView": "/",
   "hideFrontmatter": true,
   "activeSpace": "",
   "defaultDateFormat": "MMM dd yyyy",
@@ -36,7 +36,9 @@
   "showRibbon": true,
   "deleteFileOption": "trash",
   "expandedSpaces": [
-    "/"
+    "/",
+    "//Data Engineering",
+    "//Excalidraw"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
@@ -81,7 +83,7 @@
   "enableTagSpaces": true,
   "enableHomeSpace": true,
   "showSpacePinIcon": true,
-  "minimalFix": false,
+  "minimalFix": true,
   "experimental": false,
   "systemName": "Vault"
 }
