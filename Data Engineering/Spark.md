@@ -2,13 +2,31 @@
 banner: "![[Spark.png]]"
 ---
 
+Contents
 
-- [[#Hadoop vs Spark|Hadoop vs Spark]]
-- [[#Why Spark|Why Spark]]
-- [[#Apache Spark Ecosystem|Apache Spark Ecosystem]]
-- [[#Spark and Pyspark|Spark and Pyspark]]
+- [Hadoop vs Spark](#Hadoop%20vs%20Spark)
+- [Why Spark](#Why%20Spark)
+- [Apache Spark Ecosystem](#Apache%20Spark%20Ecosystem)
+- [Spark and Pyspark](#Spark%20and%20Pyspark)
+		- [Local Mode vs Cluster Mode](#Local%20Mode%20vs%20Cluster%20Mode)
+- [Client + Spark + HDFS](#Client%20+%20Spark%20+%20HDFS)
+- [Spark Architecture](#Spark%20Architecture)
+		- [SSH](#SSH)
+		- [Driver Program](#Driver%20Program)
+		- [Driver Program vs Spark Context](#Driver%20Program%20vs%20Spark%20Context)
+		- [Spark context and Spark Session](#Spark%20context%20and%20Spark%20Session)
+		- [Container](#Container)
+		- [Resource manager](#Resource%20manager)
+			- [YARN](#YARN)
+			- [Node manager vs YARN](#Node%20manager%20vs%20YARN)
+			- [Execution](#Execution)
+		- [Application Execution](#Application%20Execution)
+		- [Spark Application Execution:](#Spark%20Application%20Execution:)
+		- [Resource Allocation + Executor + Partitioning](#Resource%20Allocation%20+%20Executor%20+%20Partitioning)
+		- [Client Mode vs Cluster mode](#Client%20Mode%20vs%20Cluster%20mode)
+		- [Spark Submit](#Spark%20Submit)
 
-## Hadoop vs Spark 
+- ## Hadoop vs Spark 
 - Batch Processing 
 - Slow Performance due to In Memory 
   
@@ -468,4 +486,67 @@ This process allows Spark to efficiently distribute computation across a cluster
 
 
 
+
+
+
+#### Client Mode vs Cluster mode 
+
+--- start-multi-column: ID_6kt3
+```column-settings
+Number of Columns: 3
+Largest Column: standard
+```
+
+Aspect
+
+Driver Location 
+
+Resource Utilization 
+
+communication 
+
+Use case 
+
+Advantages 
+
+
+--- column-break ---
+
+Cluster mode 
+
+Driver program runs on one of the worker nodes within the cluster.
+
+Cluster manager allocates resources for both the driver and executor programs, utilizing the entire cluster.
+
+After submission, the client machine's involvement diminishes, and the cluster manager handles resource allocation.
+
+More suitable for large-scale production deployments where cluster resources are required for efficient execution.
+
+Efficient utilization of cluster resources; well-suited for scenarios where the client machine may lack sufficient resources.
+
+--- column-break ---
+
+Client mode
+
+Driver program runs on the machine where the Spark application is submitted.
+
+Client machine actively participates in execution, using its own resources for running the driver program.
+
+Driver communicates directly with the cluster manager to request and allocate resources for executors.
+
+Suitable for development, debugging, and scenarios where the client machine has sufficient resources.
+
+Easier debugging and monitoring; suitable for scenarios where the client machine has enough resources for the driver
+
+--- end-multi-column
+
+Links - https://sparkbyexamples.com/spark/spark-deploy-modes-client-vs-cluster/
+
+
+
+
+
+#### Spark Submit 
+
+Links - https://medium.com/@mojtaba81/introduction-to-spark-submit-d22cde2dfa86
 

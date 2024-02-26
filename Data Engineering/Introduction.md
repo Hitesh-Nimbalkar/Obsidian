@@ -1,3 +1,36 @@
+## What is Big Data 
+
+**- Quality / Volume 
+- **Processing Time** 
+**To define A a data is a Big data depends on the volume and relative processing Time** 
+
+
+Big Data refers to extremely large and complex datasets that cannot be easily managed, processed, or analyzed with traditional data processing tools. The term "big" doesn't just refer to the size of the data but also encompasses the challenges associated with handling various types of data, such as structured, semi-structured, and unstructured data, at high velocity and with a wide variety.
+
+Big Data is typically characterized by three main aspects, often referred to as the three Vs:
+
+1. **Volume:** The sheer size of the data generated or collected, which exceeds the capacity of traditional databases and processing systems. This could range from terabytes to petabytes and beyond.
+    
+2. **Velocity:** The speed at which data is generated, collected, and processed. In many cases, data is produced in real-time or near-real-time, and traditional processing systems may struggle to keep up with this pace.
+    
+3. **Variety:** The diversity of data types and sources. Big Data includes structured data (e.g., databases), semi-structured data (e.g., XML or JSON files), and unstructured data (e.g., text, images, videos). Managing and analyzing this diverse range of data types poses additional challenges.
+    
+
+Additionally, there are two more Vs that are sometimes considered:
+
+4. **Veracity:** The quality and reliability of the data. Big Data sources may include noisy, incomplete, or inconsistent data, and dealing with such issues is a significant concern.
+    
+5. **Value:** Extracting meaningful insights and value from the data. The ultimate goal of Big Data is not just to store and process large volumes of data but to derive actionable insights and value from it.
+    
+
+To handle Big Data, organizations often use specialized tools and technologies, such as distributed computing frameworks like Apache Hadoop and Apache Spark, as well as NoSQL databases. Machine learning and advanced analytics are frequently applied to extract valuable insights from these massive datasets.
+
+
+> As long as business is able to cope with with the processing and storage cost of the data it is not a Big Data 
+
+
+
+
 
 ## 3 vs of Data 
   
@@ -219,8 +252,77 @@ Apple
 --- end-multi-column
 
 
+# Hadoop Implementation 
+![[Hadoop Client Endge.png]]
 
 
 
 
+![[Login Hadoop.png]]
 
+##### Hadoop Command
+![[HAdoop Command.png]]
+
+**hadoop fs:**
+
+- `hadoop fs` is a generic command to interact with HDFS and other supported file systems.
+- It supports a variety of file system operations, including listing files, creating directories, copying files, moving files, and more.
+- This command provides a unified interface that works with both HDFS and other file systems such as the local file system or other distributed file systems supported by Hadoop.
+
+``` linux
+	hadoop fs -ls /path/to/directory
+hadoop fs -mkdir /new/directory
+hadoop fs -copyToLocal /hdfs/source /local/destination
+
+```
+##### VI Not allowed 
+- Hadoop Does noto allow Update of File whole file is replaced for any changees done 
+- No editing or viewinf dile in vi as files is disrtributed in fragments accross Distributed Node Data Blocks 
+
+##### Hadoop Create Directory 
+![[Hadoop Create Directory.png]]
+
+
+##### List Files in Directory 
+![[List Files HD.png]]![[HD List files.png]]
+
+##### Copy Files to HDFS
+
+
+``` python
+# List files and directories in HDFS
+hadoop fs -ls /path/to/directory
+
+# Create a new directory in HDFS
+hadoop fs -mkdir /new/directory
+
+# Copy a file from the local file system to HDFS
+hadoop fs -copyFromLocal /path/to/local/file /path/in/hdfs
+
+# Copy a file from HDFS to the local file system
+hadoop fs -copyToLocal /path/in/hdfs /local/destination
+
+# Move or rename a file or directory in HDFS
+hadoop fs -mv /old/path /new/path
+
+# Display the contents of a file in HDFS
+hadoop fs -cat /path/to/file
+
+# Display the first few lines of a file in HDFS
+hadoop fs -head /path/to/file
+
+# Display the last few lines of a file in HDFS
+hadoop fs -tail /path/to/file
+
+# Remove a file or directory from HDFS
+hadoop fs -rm /path/to/file
+hadoop fs -rmdir /path/to/directory
+
+# Upload a local file or directory to HDFS
+hadoop fs -put /path/to/local/file /path/in/hdfs
+
+# Download a file or directory from HDFS to the local file system
+hadoop fs -get /path/in/hdfs /local/destination
+
+```
+![[Pasted image 20240225205430.png]]

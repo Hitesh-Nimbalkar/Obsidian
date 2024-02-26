@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data Engineering/Hive&nbsp;.md",
+                "file": "Data Engineering/Introduction.md",
                 "mode": "source",
                 "source": false
               }
@@ -96,7 +96,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "5a7d6f7d4dff8f3a",
@@ -112,7 +113,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Data Engineering/Hive&nbsp;.md",
+                "file": "Data Engineering/Introduction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,7 +130,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Data Engineering/Hive&nbsp;.md",
+                "file": "Data Engineering/Introduction.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -152,7 +153,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Data Engineering/Hive&nbsp;.md"
+                "file": "Data Engineering/Introduction.md"
               }
             }
           },
@@ -189,27 +190,29 @@
   },
   "active": "b3380e1f3a27bad6",
   "lastOpenFiles": [
-    "Data Engineering/Spark.md",
-    "Data Engineering/Hive&nbsp;.md",
-    "Spark.png",
-    "Data Engineering/Introduction.canvas",
-    "Excalidraw/Drawing 2024-02-25 11.31.02.excalidraw.md",
-    "Excalidraw/Drawing 2024-02-25 11.30.47.excalidraw.md",
+    "Pasted image 20240225205430.png",
+    "HD List files.png",
+    "List Files HD.png",
+    "Hadoop Create Directory.png",
+    "HAdoop Command.png",
+    "Login Hadoop.png",
+    "Pasted image 20240225204119.png",
+    "Hadoop Client Endge.png",
+    "Data Engineering/Hive.md",
     "Data Engineering/Introduction.md",
+    "Data Engineering/Introduction.canvas",
+    "Data Engineering/Spark.md",
+    "Spark Submit.md",
+    "Excalidraw/Spark Submit .md",
+    "Excalidraw/Drawing 2024-02-25 11.30.47.excalidraw.md",
+    "Spark.png",
     "Excalidraw",
     "YARN Working.png",
     "Sparkoverview.png",
-    "Spark A.png",
-    "Spark Architecture-1.png",
-    "Spark Architecture.png",
     "pyspark/pyspark.md",
     "pyspark",
     "spark/spark.md",
     "spark",
-    "spark + python.png",
-    "Spark Ecosystem.png",
-    "Spark vs pyspark.png",
-    "Spark vs Mapreduce.png",
     "Untitled.md",
     "Data Engineering",
     "Course",
