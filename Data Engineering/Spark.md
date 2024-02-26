@@ -4,7 +4,8 @@ banner: "![[Spark.png]]"
 
 Contents
 
-- [Hadoop vs Spark](#Hadoop%20vs%20Spark)
+Contents
+
 - [Why Spark](#Why%20Spark)
 - [Apache Spark Ecosystem](#Apache%20Spark%20Ecosystem)
 - [Spark and Pyspark](#Spark%20and%20Pyspark)
@@ -23,8 +24,23 @@ Contents
 		- [Application Execution](#Application%20Execution)
 		- [Spark Application Execution:](#Spark%20Application%20Execution:)
 		- [Resource Allocation + Executor + Partitioning](#Resource%20Allocation%20+%20Executor%20+%20Partitioning)
+				- [Executor](#Executor)
 		- [Client Mode vs Cluster mode](#Client%20Mode%20vs%20Cluster%20mode)
 		- [Spark Submit](#Spark%20Submit)
+		- [Partitioning](#Partitioning)
+				- [1. **Partitioning:**](#1.%20**Partitioning:**)
+				- [2. **Task Execution:**](#2.%20**Task%20Execution:**)
+				- [3. **Data Locality:**](#3.%20**Data%20Locality:**)
+				- [4. **Efficient Computation:**](#4.%20**Efficient%20Computation:**)
+				- [5. **Task Scheduling:**](#5.%20**Task%20Scheduling:**)
+				- [6. **Fault Tolerance:**](#6.%20**Fault%20Tolerance:**)
+		- [Spark RDD](#Spark%20RDD)
+			- [RDD + DAG](#RDD%20+%20DAG)
+		- [Action and Transformations](#Action%20and%20Transformations)
+			- [RDD Transformation](#RDD%20Transformation)
+				- [Narrow Transformation](#Narrow%20Transformation)
+				- [Wide Transformation](#Wide%20Transformation)
+	- [Lazy Evaluation](#Lazy%20Evaluation)
 
 - ## Hadoop vs Spark 
 - Batch Processing 
@@ -484,6 +500,26 @@ This process allows Spark to efficiently distribute computation across a cluster
 - **Tasks:** Units of work executed in parallel.
 
 
+###### Executor 
+
+![[Saprk Executor.png]]
+Executors in Apache Spark are located on each worker node in the Spark cluster. Each worker node typically runs one or more Executors, and these Executors are responsible for executing tasks assigned to them by the Spark Driver. The distribution of Executors across worker nodes enables parallel processing of data in a distributed fashion.
+
+Here's a brief overview of how Executors are distributed in a Spark cluster:
+
+1. **Worker Nodes:** In a Spark cluster, there are multiple worker nodes. Each worker node is a physical or virtual machine that contributes computational resources to the cluster.
+    
+2. **Executors on Worker Nodes:** Executors are launched on each worker node. The number of Executors on a node is configurable, and it depends on the available resources on that particular node.
+    
+3. **Task Execution:** When a Spark application is submitted, tasks are divided across the partitions of the data, and these tasks are sent to Executors for execution.
+    
+4. **Parallel Execution:** Executors on different nodes can execute tasks in parallel, processing data distributed across the cluster.
+    
+5. **Data Storage:** Executors on each node also manage the storage of data partitions in memory and on disk, contributing to Spark's ability to cache and reuse intermediate results for performance optimization.
+    
+6. **Fault Tolerance:** Executors play a role in fault tolerance by re-executing tasks in case of failures. The Spark Driver keeps track of the lineage information in the Directed Acyclic Graph (DAG) to recover lost data by re-computing tasks on available Executors.
+
+
 
 
 
@@ -541,12 +577,318 @@ Easier debugging and monitoring; suitable for scenarios where the client machine
 --- end-multi-column
 
 Links - https://sparkbyexamples.com/spark/spark-deploy-modes-client-vs-cluster/
+https://youtu.be/uvup4DIzVZ8
+ 
 
+In the context of Apache Spark, "client mode" and "cluster mode" refer to the ways in which a Spark application can be executed in a distributed environment. The choice between these modes depends on how the Spark driver program is managed and where it runs. Let's delve into each mode:
 
+1. **Client Mode:**
+    
+    - In client mode, the driver program runs on the machine where the Spark application is submitted.
+    - The client machine is responsible for initiating the SparkContext and overseeing the execution of the application.
+    - The driver program interacts with the cluster manager (such as YARN, Mesos, or Standalone) to request resources for task execution.
+    - The application's output and logs are typically sent back to the client machine.
+    - This mode is often used during development and debugging when the developer wants to have direct access to the Spark driver program.
+    
+    To submit a Spark application in client mode, you might use a command like:
+
+    
+    `spark-submit --master yarn --deploy-mode client your_app.py`
+    
+2. **Cluster Mode:**
+    
+    - In cluster mode, the driver program runs on one of the cluster's worker nodes rather than on the machine where the application was submitted.
+    - The client machine is responsible for initiating the SparkContext, but the actual Spark driver runs within the cluster.
+    - The driver program interacts with the cluster manager to request resources and manage the execution of tasks.
+    - The application's output and logs are stored on the cluster, and the client machine typically only receives the final status.
+    - This mode is commonly used in production environments for large-scale distributed processing.
+    
+    To submit a Spark application in cluster mode, you might use a command like:
+    
+    
+    `spark-submit --master yarn --deploy-mode cluster your_app.py`
+    
+
+The choice between client and cluster mode depends on factors such as the development or production nature of the application, resource management preferences, and whether direct access to the driver program's logs and outputs is essential.
+
+Both modes leverage Spark's ability to distribute computation across a cluster, but the distinction lies in where the Spark driver program is executed and where the application's output is managed.
 
 
 
 #### Spark Submit 
 
 Links - https://medium.com/@mojtaba81/introduction-to-spark-submit-d22cde2dfa86
+
+
+#### Partitioning 
+Spark is a cluster processing engine that allows data to be processed in parallel. Apache Spark's parallelism will enable developers to run tasks parallelly and independently on hundreds of computers in a cluster. All thanks to Apache Spark's fundamental idea, RDD.
+
+![[RDD Partition.png]]
+
+[Resilient Distributed Datasets](https://www.projectpro.io/article/working-with-spark-rdd-for-fast-data-processing/273 "Spark RDD") are collection of various data items that are so huge in size, that they cannot fit into a single node and have to be partitioned across various nodes. Spark automatically partitions RDDs and distributes the partitions across different nodes. A partition in spark is an atomic chunk of data (logical division of data) stored on a node in the cluster. Partitions are basic units of parallelism in Apache Spark. RDDs in Apache Spark are collection of partitions.
+
+Resilient Distributed Datasets (RDDs) are a fundamental data abstraction that represents a distributed collection of data. RDDs are divided into partitions, and the efficient execution of RDDs in Spark involves the parallel processing of these partitions across a distributed cluster of machines. Here's how RDDs are partitioned and executed efficiently in Spark:
+
+###### 1. **Partitioning:**
+
+- **Division of Data:**
+    
+    - RDDs logically represent a collection of data, but in practice, the data is divided into partitions.
+    - Partitions are the basic units of parallelism, allowing Spark to distribute the work across multiple nodes in the cluster.
+- **User-Specified or Default:**
+    
+    - Partitioning can be user-specified when creating an RDD, or Spark can use a default partitioning strategy based on the underlying data source (e.g., HDFS blocks).
+- **Independence of Partitions:**
+    
+    - Partitions are processed independently of each other, which enables parallel execution and scalability.
+
+###### 2. **Task Execution:**
+
+- **Task Distribution:**
+    
+    - RDD operations, such as transformations and actions, are broken down into tasks.
+    - Each task operates on a single partition of the RDD.
+- **Task Execution in Executors:**
+    
+    - Tasks are executed by Executors, which are distributed across the worker nodes in the Spark cluster.
+    - Executors process tasks in parallel, each responsible for its assigned partition.
+
+###### 3. **Data Locality:**
+
+- **Minimizing Data Movement:**
+    - Spark aims to execute tasks on the node where the corresponding data partition resides (data locality).
+    - This minimizes data movement across the network, improving performance.
+
+###### 4. **Efficient Computation:**
+
+- **In-Memory Processing:**
+    
+    - Spark encourages in-memory processing by caching or persisting RDD partitions in memory.
+    - This reduces the need to read data from disk repeatedly and speeds up iterative algorithms.
+- **Lazy Evaluation:**
+    
+    - Spark uses lazy evaluation, meaning transformations on RDDs are not executed immediately but rather when an action is triggered.
+    - This allows Spark to optimize the execution plan based on the sequence of transformations and actions.
+
+###### 5. **Task Scheduling:**
+
+- **Dynamic Task Scheduling:**
+    - Spark schedules tasks dynamically, optimizing the execution plan based on the available resources in the cluster.
+    - Executors may be added or removed based on the workload.
+
+###### 6. **Fault Tolerance:**
+
+- **Lineage Information:**
+    
+    - RDDs maintain lineage information, recording the sequence of transformations applied to derive the current RDD.
+    - In case of data loss or task failure, Spark uses lineage information to recompute lost partitions.
+- **Task Re-execution:**
+    
+    - Failed tasks can be re-executed on available Executors, ensuring fault tolerance and data reliability.
+
+In summary, the efficient execution of RDDs in Spark involves the careful partitioning of data, parallel execution of tasks across distributed Executors, data locality to minimize data movement, and optimization through in-memory processing and lazy evaluation. These characteristics contribute to the scalability and performance of Spark applications.
+
+#### Spark RDD 
+Link - https://youtu.be/nH6C9vqtyYU
+>  https://www.tutorialspoint.com/apache_spark/apache_spark_rdd.htm
+
+
+
+RDD stands for Resilient Distributed Dataset, and it is a fundamental data structure in Apache Spark, a distributed computing framework. RDDs are designed to handle distributed data processing across a cluster of computers. Here are some key characteristics and aspects of RDDs:
+
+1. **Distributed Computing:** RDDs allow data to be distributed across multiple nodes in a cluster. This enables parallel processing and can significantly improve the performance of data-intensive tasks.
+    
+2. **Resilience:** The term "resilient" in RDD refers to the ability to recover from node failures. RDDs achieve fault tolerance by keeping track of the transformations applied to the data, allowing them to be recomputed in case a partition of the dataset is lost due to a node failure.
+    
+3. **Immutability:** RDDs are immutable, meaning that once created, their content cannot be changed. Instead of modifying an RDD in place, you create a new RDD by applying transformations. This immutability simplifies fault recovery and enables some optimizations.
+    
+4. **Lazy Evaluation:** Transformations on RDDs are lazily evaluated, meaning that the execution is deferred until an action is triggered. This allows Spark to optimize the execution plan by combining multiple transformations and avoiding unnecessary computations.
+    
+5. **Transformation and Action Operations:**
+    
+    - **Transformations:** These are operations that create a new RDD from an existing one. Examples include `map`, `filter`, `flatMap`, and `groupByKey`.
+    - **Actions:** These are operations that return a value to the driver program or write data to an external storage system. Examples include `count`, `collect`, `reduce`, and `saveAsTextFile`.
+6. **Parallel Processing:** RDDs support parallel processing by dividing the data into partitions, each of which can be processed independently on different nodes of the cluster.
+    
+7. **Caching:** RDDs can be explicitly cached in memory to speed up iterative algorithms or to reuse them across multiple stages of a computation.
+    
+
+It's worth noting that while RDDs were a foundational abstraction in Spark, later versions of Spark introduced higher-level abstractions like DataFrames and Datasets, which provide a more structured and optimized API for working with distributed data. These abstractions build on the concepts of RDDs but offer additional optimizations and ease of use.
+
+
+##### RDD + DAG 
+Resilient Distributed Dataset (RDD) and Directed Acyclic Graph (DAG) are closely intertwined in the context of Apache Spark. RDDs serve as the foundational data structure, representing a distributed collection of data processed in parallel across a cluster of machines. RDDs are immutable and support transformations (e.g., `map`, `filter`) and actions (e.g., `count`, `collect`).
+
+Transformations applied to RDDs create new RDDs, and RDDs maintain lineage information. This lineage information, essentially a record of transformations, is crucial for fault tolerance. In the event of data loss in a partition, Spark can utilize the lineage information to recompute the lost partition from the original data source.
+
+The logical execution plan of Spark applications is represented by a Directed Acyclic Graph (DAG). The DAG captures the sequence of transformations and actions, providing a high-level view of the computation plan. Spark optimizes the execution plan based on the DAG, identifying common subexpressions, dependencies, and dividing the DAG into stages for parallel execution.
+
+Tasks, representing the smallest unit of work, are derived from the stages in the DAG. Each task can be executed on individual partitions of the data. The dynamic task scheduling in Spark leverages the DAG to optimize task execution based on the available resources.
+
+In essence, RDDs and DAGs in Spark are interdependent. RDDs provide the data abstraction, while the transformations on RDDs are logically represented by the DAG. The DAG, in turn, facilitates optimization, fault tolerance, and efficient parallel execution of Spark jobs.
+
+
+
+#### Action and Transformations 
+https://data-flair.training/blogs/spark-rdd-operations-transformations-actions/
+
+ A **Transformation** is a function that produces new **RDD** from the existing RDDs but when we want to work with the actual dataset, at that point **Action** is performed. When the action is triggered after the result, new RDD is not formed like transformation
+##### RDD Transformation
+
+**Spark Transformation** is a function that produces new RDD from the existing RDDs. It takes RDD as input and produces one or more RDD as output. Each time it creates new RDD when we apply any transformation. Thus, the so input RDDs, cannot be changed since RDD are immutable in nature.
+
+Applying transformation built an **RDD lineage**, with the entire parent RDDs of the final RDD(s). RDD lineage, also known as **RDD operator graph** or **RDD dependency graph.** It is a logical execution plan i.e., it is Directed Acyclic Graph (**[DAG](https://data-flair.training/blogs/directed-acyclic-graph-dag-in-apache-spark/)**) of the entire parent RDDs of RDD.
+
+**[Transformations are lazy](https://data-flair.training/blogs/lazy-evaluation-in-apache-spark-guide/)** in nature i.e., they get execute when we call an action. They are not executed immediately. Two most basic type of transformations is a map(), filter().  
+After the transformation, the resultant RDD is always different from its parent RDD. It can be smaller (e.g. filter, count, distinct, sample), bigger (e.g. flatMap(), union(), Cartesian()) or the same size (e.g. map).
+
+###### Narrow Transformation 
+ Narrow transformations are transformations where each partition of the resulting RDD depends on only one partition of the parent RDD. These transformations do not require shuffling or data exchange between partitions. As a result, they are more efficient and faster.
+ Examples of Narrow Transformations:
+
+1. **`map(func)` and `mapPartitions(func)`:**
+    
+    - Each element in the resulting RDD is a result of applying a function to a corresponding element or a partition of the parent RDD.
+2. **`filter(func)`:**
+    
+    - Elements in the resulting RDD are filtered based on a condition without requiring information from other partitions.
+3. **`union(otherDataset)`:**
+    
+    - Combines two RDDs without shuffling data between partitions. Each partition of the resulting RDD is derived independently._
+![[NARROW TRANSFORMATION.png]]
+###### Wide Transformation 
+Wide transformations are transformations where each partition of the resulting RDD depends on multiple partitions of the parent RDD. These transformations often require shuffling or redistribution of data across the cluster, which can be a more resource-intensive operation.
+
+ Examples of Wide Transformations:
+
+1. **`groupByKey()`:**
+    
+    - Groups data based on a key, and this may require shuffling data across partitions.
+2. **`reduceByKey(func)`:**
+    
+    - Aggregates values based on keys, involving shuffling of data to perform the reduction.
+3. **`join(otherDataset)`:**
+    
+    - Combines two RDDs based on a common key, and it involves shuffling data to bring together related key-value pairs.
+
+Working of Narrow Transformations:
+
+- **Independence of Partitions:**
+    
+    - Each partition of the resulting RDD is computed independently of other partitions.
+    - No data exchange or communication between partitions is needed during the execution.
+- **Efficiency:**
+    
+    - Narrow transformations are generally more efficient as they don't require extensive data movement or shuffling.
+
+Working of Wide Transformations:
+
+- **Dependency on Multiple Partitions:**
+    
+    - Each partition of the resulting RDD depends on data from multiple partitions of the parent RDD.
+    - This may involve the exchange of data across the network.
+- **Shuffling:**
+    
+    - Shuffling occurs, where data is reorganized and redistributed among partitions, often leading to increased computation time.
+- **Resource Intensiveness:**
+    
+    - Wide transformations are more resource-intensive compared to narrow transformations due to the need for inter-partition communication.
+![[Wide Transformation.png]]
+
+
+
+### Lazy Evaluation 
+https://www.scaler.com/topics/lazy-evaluation-in-spark/
+
+
+### RDD + DAG 
+In Apache Spark, RDDs (Resilient Distributed Datasets) and Directed Acyclic Graphs (DAGs) are closely related concepts. RDDs are the fundamental data abstraction in Spark, representing distributed collections of data, while DAGs provide a logical representation of the sequence of transformations and actions applied to RDDs in a Spark application.
+
+##### RDD (Resilient Distributed Dataset):
+
+1. **Definition:**
+    
+    - RDD is a distributed collection of immutable data that can be processed in parallel across a cluster of machines.
+2. **Characteristics:**
+    
+    - RDDs are divided into partitions, and each partition can be processed independently on different nodes in the cluster.
+    - They support transformations (e.g., `map`, `filter`) and actions (e.g., `count`, `collect`).
+3. **Lineage Information:**
+    
+    - RDDs maintain lineage information, recording the sequence of transformations applied to derive the current RDD.
+    - Lineage information is crucial for fault tolerance and recomputing lost data.
+4. **Transformation and Action Operations:**
+    
+    - Transformations on RDDs create new RDDs, and actions trigger the execution of these transformations, resulting in the materialization of the data.
+
+##### DAG (Directed Acyclic Graph):
+
+1. **Definition:**
+    
+    - DAG is a logical representation of the sequence of transformations and actions applied to RDDs in a Spark application.
+2. **Characteristics:**
+    
+    - It is a directed acyclic graph where nodes represent RDDs, and edges represent the transformations or actions applied.
+    - Transformations on RDDs contribute to the creation of the DAG.
+3. **Optimization Opportunities:**
+    
+    - The DAG allows Spark to optimize the execution plan by rearranging operations, identifying common subexpressions, and dividing the computation into stages.
+4. **Stages and Tasks:**
+    
+    - The DAG is divided into stages, where each stage represents a set of transformations that can be executed in parallel.
+    - Tasks are the smallest units of work, executed on individual partitions of the data.
+
+##### Relationship:
+
+1. **Logical Flow of Operations:**
+    
+    - RDDs are created through transformations and actions, and the sequence of these operations is logically captured by the DAG.
+2. **DAG Construction:**
+    
+    - As transformations are applied to RDDs, the DAG is constructed incrementally to represent the flow of data and operations.
+3. **Optimization using DAG:**
+    
+    - The DAG provides Spark with a comprehensive view of the computation plan, allowing for optimization opportunities.
+    - Spark can optimize the execution plan based on the DAG, rearranging operations for better performance.
+4. **Fault Tolerance and Lineage:**
+    
+    - RDD lineage information, which contributes to fault tolerance, is reflected in the DAG.
+    - If a partition is lost, Spark can use the lineage information in the DAG to recompute the lost data.
+
+In summary, RDDs are the data abstraction in Spark, and DAGs are the logical representation of the computation plan. The creation and transformations of RDDs contribute to the construction of the DAG, providing Spark with the necessary information to optimize and execute the Spark job efficiently.
+
+##### Lineage Graph
+A lineage graph in Apache Spark is a directed acyclic graph (DAG) that represents the sequence of transformations and dependencies between RDDs (Resilient Distributed Datasets) in a Spark computation. It captures the lineage or the logical execution plan of a Spark application.
+
+Here are the key aspects of the lineage graph:
+
+1. **Definition:**
+    
+    - A lineage graph is a directed acyclic graph where each node represents an RDD, and each edge represents a transformation operation applied to derive a new RDD.
+2. **Construction:**
+    
+    - The lineage graph is constructed as transformations are applied to RDDs in a Spark application.
+    - Each RDD in the lineage graph is associated with the transformation that created it.
+3. **Dependency Relationships:**
+    
+    - Nodes (RDDs) in the lineage graph have dependencies on the parent RDDs from which they were derived.
+    - The edges in the graph represent the dependencies between RDDs, showing how data flows from one RDD to another through transformations.
+4. **Fault Tolerance:**
+    
+    - The lineage graph is a key component of Spark's fault-tolerance mechanism.
+    - If a partition of an RDD is lost due to node failure, Spark can use the lineage graph to recompute the lost partition by replaying the transformations from the original data source.
+5. **Optimization:**
+    
+    - Spark uses the lineage graph for optimization purposes.
+    - During the execution planning phase, Spark can optimize the DAG by identifying common subexpressions, reordering transformations, and dividing the computation into stages.
+6. **DAG and Lineage Graph Relationship:**
+    
+    - The lineage graph is an integral part of the larger Directed Acyclic Graph (DAG) that represents the entire computation plan of a Spark application.
+    - The lineage graph focuses specifically on the dependencies and transformations applied to RDDs.
+
+
+### Job Execution 
+.
+Important - https://data-flair.training/blogs/how-apache-spark-works/
+
 
