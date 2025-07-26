@@ -1,0 +1,11 @@
+
+- [ ] Regression 
+	- [ ] Simple Linear Regression 
+	- [ ] Non Linear Regression 
+	- [ ] Basic Intuition 
+	- [ ] Cost Function and Loss Function
+		- [ ] Mean Square Error 
+		- [ ] MAE
+		- [ ] RMSE
+	- [ ] Convergence Algorithm 
+	- [ ] 
